@@ -1,0 +1,18 @@
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build Iosevka Custom Term
+        runs:
+          using: docker
+          image: avivace/iosevka-build
+          options: "-v $(pwd):/build"
+          args:
+            - 'ttf::iosevka-custom-term'
+
+      - name: debug
+        run:
+          - 'ls -la'
