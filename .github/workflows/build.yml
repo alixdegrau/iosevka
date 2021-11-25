@@ -1,18 +1,24 @@
-on: push
+name: "Build custom Iosevka fonts"
+
+on:
+  push:
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Build Iosevka Custom Term
+      - uses: actions/checkout@v2
+
+      - name: "Build Iosevka Custom Term"
         runs:
           using: docker
           image: avivace/iosevka-build
-          options: "-v $(pwd):/build"
+          options: '-v $(pwd):/build'
           args:
             - 'ttf::iosevka-custom-term'
 
-      - name: debug
+      - name: "debug"
         run:
           - 'ls -la'
